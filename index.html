@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Wise</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #d9c1a1;
+    }
+
+    #search-task {
+      width: 40%;
+    }
+
+    nav {
+      width: 200px;
+      background-color: #333;
+      color: #f6f1e5;
+      padding-top: 20px;
+    }
+
+    main {
+      flex: 1;
+      padding: 10px;
+      display: flex;
+      flex-direction: column; 
+    }
+
+
+   .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+   .modal-content {
+      background-color: #f6f1e5;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+   .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+   .close:hover,
+   .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+   .task-list {
+      list-style-type: none;
+      padding: 0;
+      width: 100%; 
+    }
+
+   .task-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+   .task-checkbox {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Time Wise</h1>
+      <button id="add-task">+ Add Task</button>
+    </div>
+    <input type="text" id="search-task" placeholder="Search Task">
+    <div>
+      <button id="notification"><img src="/Users/abc/Documents/Website/icons/bell-icon.jpg" alt="Notification"></button>
+      <button id="user-setting"><img src="/Users/abc/Documents/Website/icons/user-icon.jpg" alt="User Setting"></button>
+    </div>
+  </header>
+
+  <div class="content-container">
+    <nav class="sidebar">
+      <ul>
+        <li><a href="#" onclick="showPage('home')"><img src="/Users/abc/Documents/Website/icons/home-icon.png" alt="Home"> Home</a></li>
+        <li><a href="#" onclick="showPage('timetable')"><img src="/Users/abc/Documents/Website/icons/table-icon.png" alt="Time Table"> Time Table</a></li>
+      </ul>
+    </nav>
+
+
+    <main>
+      <div id="home" style="display: block;">
+        <h2>Upcoming Task</h2>
+        <ul id="upcoming-tasks" class="task-list"></ul>
+        <h2>Today</h2>
+        <ul id="today-tasks" class="task-list"></ul>
+        <h2>Overdue</h2>
+        <ul id="overdue-tasks" class="task-list"></ul>
+        <h2>Completed</h2>
+        <ul id="completed-tasks" class="task-list"></ul>
+      </div>
+      <div id="timetable" style="display: none;">
+        <h2>Create Your Time Table</h2>
+        <table id="timetable-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <button id="add-row">Add Time Slot</button>
+      </div>
+      <div id="taskmanager" style="display: none;">
+      </div>
+    </main>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Add Task</h2>
+      <label for="task-name-modal">Task Name:</label>
+      <input type="text" id="task-name-modal" placeholder="Task Name">
+      <br>
+      <label for="task-description-modal">Task Description:</label>
+      <textarea id="task-description-modal" placeholder="Task Description"></textarea>
+      <br>
+      <label for="due-date-modal">Due Date:</label>
+      <input type="date" id="due-date-modal" placeholder="Due Date">
+      <br>
+      <label for="priority-modal">Priority:</label>
+      <select id="priority-modal">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <br>
+      <button id="add-task-modal">Add Task</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function showPage(pageId) {
+      const pages = ['home', 'timetable', 'taskmanager'];
+      pages.forEach(page => {
+        const element = document.getElementById(page);
+        if (page === pageId) {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
